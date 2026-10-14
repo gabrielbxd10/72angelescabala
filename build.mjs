@@ -45,4 +45,11 @@ function addHints(html) {
   writeFileSync('versao-melhorada.html', await minify(html, opts));
 }
 
+// Upsell 1: /upsell
+{
+  let html = readFileSync('src/upsell.html', 'utf8');
+  html = addHints(html);
+  writeFileSync('upsell/index.html', await minify(html, opts));
+}
+
 console.log('ok');
