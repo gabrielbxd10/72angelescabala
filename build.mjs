@@ -52,4 +52,14 @@ function addHints(html) {
   writeFileSync('upsell/index.html', await minify(html, opts));
 }
 
+// Upsell 2: /upsell2 (reaproveita o CSS do upsell 1 para manter o mesmo visual)
+{
+  const base = readFileSync('src/upsell.html', 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
+  let html = readFileSync('src/upsell2.tpl.html', 'utf8');
+  if (!html.includes('/*BASE_CSS*/')) throw new Error('marcador BASE_CSS não encontrado');
+  html = html.replace('/*BASE_CSS*/', () => base);
+  html = addHints(html);
+  writeFileSync('upsell2/index.html', await minify(html, opts));
+}
+
 console.log('ok');
