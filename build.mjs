@@ -107,7 +107,6 @@ mkdirSync('downsell2', { recursive: true });
     ['OFERTA EXCLUSIVA DE ESTA PÁGINA', 'ÚLTIMA OPORTUNIDAD · LA MISMA BIBLIOTECA'],
     ['<s>De US$24,90</s>', '<s>De OLDPRICE</s>'],
     ['<small>US$</small>14,90', '<small>US$</small>7,90'],
-    ['<p>Este es un precio exclusivo para quienes acaban de adquirir la guía, disponible solo en esta página.</p>', '<p>Porque es la última oportunidad de esta oferta: la misma biblioteca completa, con las 10 guías, por US$7,90. Solo está disponible en esta página.</p>'],
     ['US$14,90', 'US$7,90'],
     ['src="assets/', 'src="../upsell/assets/'],
     ['href="assets/', 'href="../upsell/assets/'],
