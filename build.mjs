@@ -2,7 +2,7 @@
 // Uso: npm i -D html-minifier-terser@7.2.0 && node build.mjs
 // Não altera design, textos, imagens nem scripts: só minifica, embute o CSS
 // e adiciona dicas de conexão antecipada para os domínios de rastreamento.
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { minify } from 'html-minifier-terser';
 
 const opts = {
@@ -60,6 +60,57 @@ function addHints(html) {
   html = html.replace('/*BASE_CSS*/', () => base);
   html = addHints(html);
   writeFileSync('upsell2/index.html', await minify(html, opts));
+}
+
+// Downsells: mesmo produto do upsell, a US$7,90 (gerados a partir das páginas de upsell)
+function rep(html, pairs, file) {
+  for (const [a, b] of pairs) {
+    if (!html.includes(a)) throw new Error(`${file}: trecho não encontrado: ${a.slice(0, 60)}`);
+    html = html.split(a).join(b);
+  }
+  return html;
+}
+const DOWN_TOP = 'ESPERA: UNA ÚLTIMA OPORTUNIDAD';
+mkdirSync('downsell1', { recursive: true });
+mkdirSync('downsell2', { recursive: true });
+{
+  let html = readFileSync('src/upsell.html', 'utf8');
+  html = rep(html, [
+    ['<title>Biblioteca de Profundización · 10 guías de los 72 Ángeles</title>', '<title>Última oportunidad · Biblioteca de Profundización por US$7,90</title>'],
+    ['OFERTA ÚNICA PARA QUIENES ACABAN DE ADQUIRIR LA GUÍA', DOWN_TOP],
+    ['<h1>Ya tienes a los 72 Ángeles. Ahora entiende <em>de dónde viene cada uno</em> y lleva tu estudio mucho más lejos.</h1>', '<h1>Quizás no era el momento. Por eso te ofrecemos <em>la misma biblioteca completa</em> por casi la mitad.</h1>'],
+    ['<div class="anchor"><s>US$24,90</s><strong>US$14,90</strong><span>Precio exclusivo de esta página</span></div>', '<div class="anchor"><s>OLDPRICE</s><strong>US$7,90</strong><span>Última oportunidad</span></div>'],
+    ['SÍ, QUIERO AÑADIR LAS 10 GUÍAS', 'SÍ, QUIERO LAS 10 GUÍAS POR US$7,90'],
+    ['OFERTA EXCLUSIVA DE ESTA PÁGINA', 'ÚLTIMA OPORTUNIDAD · LA MISMA BIBLIOTECA'],
+    ['<s>De US$24,90</s>', '<s>De OLDPRICE</s>'],
+    ['<small>US$</small>14,90', '<small>US$</small>7,90'],
+    ['<p>Este es un precio exclusivo para quienes acaban de adquirir la guía, disponible solo en esta página.</p>', '<p>Porque es la última oportunidad de esta oferta: la misma biblioteca completa, con las 10 guías, por US$7,90. Solo está disponible en esta página.</p>'],
+    ['US$14,90', 'US$7,90'],
+    ['src="assets/', 'src="../upsell/assets/'],
+    ['href="assets/', 'href="../upsell/assets/'],
+    ["'assets/'+f", "'../upsell/assets/'+f"],
+  ], 'downsell1');
+  html = html.split('OLDPRICE').join('US$14,90');
+  writeFileSync('downsell1/index.html', await minify(addHints(html), opts));
+}
+{
+  const base = readFileSync('src/upsell.html', 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
+  let html = readFileSync('src/upsell2.tpl.html', 'utf8').replace('/*BASE_CSS*/', () => base);
+  html = rep(html, [
+    ['<title>Kit de Práctica Angélica · 6 guías para vivir con los 72 Ángeles</title>', '<title>Última oportunidad · Kit de Práctica Angélica por US$7,90</title>'],
+    ['UN ÚLTIMO PASO PARA COMPLETAR TU CAMINO', DOWN_TOP],
+    ['<h1>Ya sabes quién es cada Ángel. Ahora <em>llévalo a tu vida</em>, un poco cada día.</h1>', '<h1>Quizás no era el momento. Por eso te ofrecemos <em>el mismo kit completo</em> por casi la mitad.</h1>'],
+    ['<div class="anchor"><strong>US$14,90</strong><span>Solo en esta página</span></div>', '<div class="anchor"><s>OLDPRICE</s><strong>US$7,90</strong><span>Última oportunidad</span></div>'],
+    ['SÍ, QUIERO EMPEZAR MI PRÁCTICA', 'SÍ, QUIERO EL KIT POR US$7,90'],
+    ['OFERTA EXCLUSIVA DE ESTA PÁGINA', 'ÚLTIMA OPORTUNIDAD · EL MISMO KIT'],
+    ['<div class="price"><small>US$</small>14,90</div>', '<s>De OLDPRICE</s><div class="price"><small>US$</small>7,90</div>'],
+    ['Unos US$0,10 por página', 'Unos US$0,05 por página'],
+    ['US$14,90', 'US$7,90'],
+    ['src="assets/', 'src="../upsell2/assets/'],
+    ['href="assets/', 'href="../upsell2/assets/'],
+  ], 'downsell2');
+  html = html.split('OLDPRICE').join('US$14,90');
+  writeFileSync('downsell2/index.html', await minify(addHints(html), opts));
 }
 
 console.log('ok');
