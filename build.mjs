@@ -113,4 +113,12 @@ mkdirSync('downsell2', { recursive: true });
   writeFileSync('downsell2/index.html', await minify(addHints(html), opts));
 }
 
+// Página de obrigado: /obrigado
+mkdirSync('obrigado', { recursive: true });
+{
+  const base = readFileSync('src/upsell.html', 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
+  const html = readFileSync('src/obrigado.tpl.html', 'utf8').replace('/*BASE_CSS*/', () => base);
+  writeFileSync('obrigado/index.html', await minify(addHints(html), opts));
+}
+
 console.log('ok');
