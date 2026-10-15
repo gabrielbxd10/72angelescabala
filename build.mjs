@@ -108,7 +108,6 @@ mkdirSync('downsell2', { recursive: true });
     ['<s>De US$24,90</s>', '<s>De OLDPRICE</s>'],
     ['<small>US$</small>14,90', '<small>US$</small>7,90'],
     ['US$14,90', 'US$7,90'],
-    ['src="assets/', 'src="../upsell/assets/'],
     ["'assets/'+f", "'../upsell/assets/'+f"],
   ], 'downsell1');
   html = html.split('OLDPRICE').join('US$14,90');
