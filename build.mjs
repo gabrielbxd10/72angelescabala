@@ -45,11 +45,34 @@ function addHints(html) {
   writeFileSync('versao-melhorada.html', await minify(html, opts));
 }
 
+
+// Remove preços das páginas de oferta (a Hotmart mostra o valor convertido no widget)
+function stripPrices(html, file) {
+  html = html.replace(/<div class="anchor">[\s\S]*?<\/div>/g, '');
+  html = html.replace(/<div class="price-box">[\s\S]*?<\/span>\s*<\/div>/g, '');
+  const pairs = [
+    [/<p>No\. Son US\$[\d,]+ en un único pago, sin mensualidades\.<\/p>/g, '<p>No. Es un único pago, sin mensualidades.</p>'],
+    [/ POR US\$[\d,]+/g, ''],
+    [/ por US\$[\d,]+/g, ''],
+    [/US\$[\d,]+ en un único pago/g, 'Un único pago'],
+    [/Porque es la última oportunidad de esta oferta: la misma biblioteca completa, con las 10 guías, por US\$[\d,]+\./g, 'Porque es la última oportunidad de esta oferta: la misma biblioteca completa, con las 10 guías, por un valor menor.'],
+    [/Este es un precio exclusivo para quienes acaban de adquirir la guía, disponible solo en esta página\./g, 'Es una condición especial para quienes acaban de adquirir la guía, disponible solo en esta página.'],
+    [/: 10 guías de profundización\.<\/title>/g, '</title>'],
+    [/ 10 guías de profundización por US\$[\d,]+\./g, ' 10 guías de profundización.'],
+    [/ 6 guías, 149 páginas, US\$[\d,]+\./g, ' 6 guías, 149 páginas.'],
+  ];
+  for (const [a, b] of pairs) html = html.replace(a, b);
+  html = html.replace('<h3>Biblioteca de Profundización<br>de los 72 Ángeles</h3>', '<h3>Biblioteca de Profundización<br>de los 72 Ángeles</h3>');
+  const left = html.match(/.{0,40}US\$[\d,]+.{0,20}/g);
+  if (left) throw new Error(file + ': preço restante: ' + left.join(' | '));
+  return html;
+}
+
 // Upsell 1: /upsell
 {
   let html = readFileSync('src/upsell.html', 'utf8');
   html = addHints(html);
-  writeFileSync('upsell/index.html', await minify(html, opts));
+  writeFileSync('upsell/index.html', await minify(stripPrices(html, 'upsell'), opts));
 }
 
 // Upsell 2: /upsell2 (reaproveita o CSS do upsell 1 para manter o mesmo visual)
@@ -59,7 +82,7 @@ function addHints(html) {
   if (!html.includes('/*BASE_CSS*/')) throw new Error('marcador BASE_CSS não encontrado');
   html = html.replace('/*BASE_CSS*/', () => base);
   html = addHints(html);
-  writeFileSync('upsell2/index.html', await minify(html, opts));
+  writeFileSync('upsell2/index.html', await minify(stripPrices(html, 'upsell2'), opts));
 }
 
 // Downsells: mesmo produto do upsell, a US$7,90 (gerados a partir das páginas de upsell)
@@ -91,7 +114,7 @@ mkdirSync('downsell2', { recursive: true });
     ["'assets/'+f", "'../upsell/assets/'+f"],
   ], 'downsell1');
   html = html.split('OLDPRICE').join('US$14,90');
-  writeFileSync('downsell1/index.html', await minify(addHints(html), opts));
+  writeFileSync('downsell1/index.html', await minify(addHints(stripPrices(html, 'downsell1')), opts));
 }
 {
   const base = readFileSync('src/upsell.html', 'utf8').match(/<style>([\s\S]*?)<\/style>/)[1];
@@ -110,7 +133,7 @@ mkdirSync('downsell2', { recursive: true });
     ['href="assets/', 'href="../upsell2/assets/'],
   ], 'downsell2');
   html = html.split('OLDPRICE').join('US$14,90');
-  writeFileSync('downsell2/index.html', await minify(addHints(html), opts));
+  writeFileSync('downsell2/index.html', await minify(addHints(stripPrices(html, 'downsell2')), opts));
 }
 
 // Página de obrigado: /obrigado
