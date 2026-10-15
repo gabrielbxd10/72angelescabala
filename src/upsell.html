@@ -6,7 +6,7 @@
 <title>Biblioteca de Profundización · 10 guías de los 72 Ángeles</title>
 <meta name="description" content="Oferta exclusiva para quienes acaban de adquirir la guía de los 72 Ángeles: 10 guías de profundización por US$14,90.">
 <meta name="robots" content="noindex">
-<link rel="preload" as="image" href="assets/biblioteca-mockup-v2.webp" fetchpriority="high">
+<link rel="preload" as="image" href="https://i.imgur.com/HX3aMEn.png" fetchpriority="high">
 
 <!-- Meta Pixel -->
 <script>
@@ -182,7 +182,7 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
   <p class="eyebrow">OFERTA ÚNICA PARA QUIENES ACABAN DE ADQUIRIR LA GUÍA</p>
   <h1>Ya tienes a los 72 Ángeles. Ahora entiende <em>de dónde viene cada uno</em> y lleva tu estudio mucho más lejos.</h1>
   <p class="lead">Añade la Biblioteca de Profundización: 10 guías que te explican la tradición detrás de los Nombres, te enseñan a leer sus símbolos y te muestran cómo combinar cada lectura.</p>
-  <img class="hero-mockup" src="assets/biblioteca-mockup-v2.webp" width="1254" height="1254" alt="Biblioteca de Profundización con diez guías digitales" fetchpriority="high">
+  <img class="hero-mockup" src="https://i.imgur.com/HX3aMEn.png" alt="Biblioteca de Profundización con diez guías digitales" fetchpriority="high">
   <div class="anchor"><s>US$24,90</s><strong>US$14,90</strong><span>Precio exclusivo de esta página</span></div>
   <a class="button wide" href="#oferta">SÍ, QUIERO AÑADIR LAS 10 GUÍAS</a>
   <p class="meta">Pago único · Sin mensualidades · Se añade a tu compra en Hotmart</p>
@@ -327,7 +327,7 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
   // Imagens: as que já estão no repositório carregam daqui; as demais vêm do upsell original (mesmo arquivo, mesma qualidade).
   var REMOTE='https://72bibliotecaupsell.vercel.app/assets/';
   var LOCAL={'sample-6-2-thumb.webp':1,'sample-6-3-thumb.webp':1,'sample-6-4-thumb.webp':1,'sample-7-2-thumb.webp':1,'sample-7-3-thumb.webp':1,'sample-7-4-thumb.webp':1,'sample-8-2-thumb.webp':1,'sample-8-3-thumb.webp':1,'sample-8-4-thumb.webp':1,'sample-9-2-thumb.webp':1,'sample-9-3-thumb.webp':1,'sample-9-4-thumb.webp':1,'sample-10-2-thumb.webp':1};
-  function src(f){return LOCAL[f]?'assets/'+f:REMOTE+f}
+  function src(f){return 'assets/'+f}
   var S=[
     [6,2,'Los 9 Coros Angélicos','Dos tradiciones, una lectura cuidadosa'],
     [6,3,'Los 9 Coros Angélicos','Primera tríada: ardor, conocimiento y receptividad'],
@@ -337,8 +337,8 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
     [8,3,'Símbolos Angélicos','Luz y sombra: claridad sin certezas totales'],
     [9,2,'Los 72 Nombres','Qué significa estudiar una tradición'],
     [9,3,'Los 72 Nombres','Éxodo 14:19-21: el pasaje de referencia'],
-    [10,2,'Casos de Estudio','Un método de integración en cinco movimientos'],
-    [10,3,'Casos de Estudio','Caso 1: una decisión con información incompleta']
+    [9,4,'Los 72 Nombres','De las letras a los grupos de tres'],
+    [10,2,'Casos de Estudio','Un método de integración en cinco movimientos']
   ];
   var grid=document.getElementById('samples'),modal=document.getElementById('viewer'),cur=0,visible=[];
   function draw(f){
@@ -356,7 +356,7 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
   }
   function show(k){
     cur=(k+visible.length)%visible.length;var s=S[visible[cur]];
-    var im=document.getElementById('modal-img');im.src=src('sample-'+s[0]+'-'+s[1]+'.webp');im.alt=s[3];
+    var im=document.getElementById('modal-img');im.src=src('sample-'+s[0]+'-'+s[1]+'-thumb.webp');im.alt=s[3];
     document.getElementById('modal-book').textContent=s[2]+' · Página '+s[1];
     document.getElementById('modal-count').textContent=(cur+1)+' / '+visible.length;
     if(!modal.open)modal.showModal();modal.scrollTop=0;

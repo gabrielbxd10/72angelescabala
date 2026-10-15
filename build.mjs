@@ -109,7 +109,6 @@ mkdirSync('downsell2', { recursive: true });
     ['<small>US$</small>14,90', '<small>US$</small>7,90'],
     ['US$14,90', 'US$7,90'],
     ['src="assets/', 'src="../upsell/assets/'],
-    ['href="assets/', 'href="../upsell/assets/'],
     ["'assets/'+f", "'../upsell/assets/'+f"],
   ], 'downsell1');
   html = html.split('OLDPRICE').join('US$14,90');
@@ -128,8 +127,6 @@ mkdirSync('downsell2', { recursive: true });
     ['<div class="price"><small>US$</small>14,90</div>', '<s>De OLDPRICE</s><div class="price"><small>US$</small>7,90</div>'],
     ['Unos US$0,10 por página', 'Unos US$0,05 por página'],
     ['US$14,90', 'US$7,90'],
-    ['src="assets/', 'src="../upsell2/assets/'],
-    ['href="assets/', 'href="../upsell2/assets/'],
   ], 'downsell2');
   html = html.split('OLDPRICE').join('US$14,90');
   writeFileSync('downsell2/index.html', await minify(addHints(stripPrices(html, 'downsell2')), opts));
