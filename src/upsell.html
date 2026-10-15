@@ -6,7 +6,7 @@
 <title>Biblioteca de Profundización · 10 guías de los 72 Ángeles</title>
 <meta name="description" content="Oferta exclusiva para quienes acaban de adquirir la guía de los 72 Ángeles: 10 guías de profundización por US$14,90.">
 <meta name="robots" content="noindex">
-<link rel="preload" as="image" href="https://i.imgur.com/HX3aMEn.png" fetchpriority="high">
+<link rel="preload" as="image" href="/upsell/assets/mockup.webp" fetchpriority="high">
 
 <!-- Meta Pixel -->
 <script>
@@ -168,6 +168,21 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
 .button{width:100%}
 .anchor strong{font-size:38px}
 }
+
+.guide{display:flex!important;flex-direction:column;gap:12px!important;padding:14px!important}
+.guide img{width:100%!important;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+@media(min-width:1000px){.guides{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:650px){.guides{grid-template-columns:1fr!important}}
+/* carrosséis de amostras */
+.carousel{position:relative;margin-top:26px}
+.track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 calc((100% - 32px)/3);scroll-snap-align:start;background:none;border:0;padding:0;cursor:zoom-in}
+.slide img{width:100%;height:auto;border-radius:8px;border:1px solid #e5e0d6;box-shadow:0 10px 26px #142d4418;background:#fafafa}
+.cnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:24px;line-height:1;box-shadow:0 6px 18px #142d4422;z-index:2}
+.cnav.prev{left:-10px}.cnav.next{right:-10px}
+@media(max-width:900px){.slide{flex-basis:70%}}
+@media(max-width:650px){.slide{flex-basis:86%}.cnav{width:38px;height:38px;font-size:20px}.cnav.prev{left:-4px}.cnav.next{right:-4px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
@@ -182,7 +197,7 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
   <p class="eyebrow">OFERTA ÚNICA PARA QUIENES ACABAN DE ADQUIRIR LA GUÍA</p>
   <h1>Ya tienes a los 72 Ángeles. Ahora entiende <em>de dónde viene cada uno</em> y lleva tu estudio mucho más lejos.</h1>
   <p class="lead">Añade la Biblioteca de Profundización: 10 guías que te explican la tradición detrás de los Nombres, te enseñan a leer sus símbolos y te muestran cómo combinar cada lectura.</p>
-  <img class="hero-mockup" src="https://i.imgur.com/HX3aMEn.png" alt="Biblioteca de Profundización con diez guías digitales" fetchpriority="high">
+  <img class="hero-mockup" src="/upsell/assets/mockup.webp" alt="Biblioteca de Profundización con diez guías digitales" fetchpriority="high">
   <div class="anchor"><s>US$24,90</s><strong>US$14,90</strong><span>Precio exclusivo de esta página</span></div>
   <a class="button wide" href="#oferta">SÍ, QUIERO AÑADIR LAS 10 GUÍAS</a>
   <p class="meta">Pago único · Sin mensualidades · Se añade a tu compra en Hotmart</p>
@@ -224,20 +239,20 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
 
   <div class="group-title"><h3>Conocimiento nuevo</h3><span>Lo que no encontrarás en tu guía ni en tus bonos</span></div>
   <div class="guides">
-    <article class="guide"><img src="https://i.imgur.com/znFjTha.png" loading="lazy" alt="Portada de Cábala Angélica Esencial"><div><small>GUÍA 02</small><h4>Cábala Angélica Esencial</h4></div></article>
-    <article class="guide"><img src="https://i.imgur.com/tIEo6AM.png" loading="lazy" alt="Portada de Los 72 Nombres: Tradición y Claves de Lectura"><div><small>GUÍA 09</small><h4>Los 72 Nombres: Tradición y Claves de Lectura</h4></div></article>
-    <article class="guide"><img src="https://i.imgur.com/9p71Nbq.png" loading="lazy" alt="Portada de Los 9 Coros Angélicos"><div><small>GUÍA 06</small><h4>Los 9 Coros Angélicos</h4></div></article>
-    <article class="guide"><img src="https://i.imgur.com/huOm3Jh.png" loading="lazy" alt="Portada de Lecturas Comparadas de los 72 Ángeles"><div><small>GUÍA 07</small><h4>Lecturas Comparadas de los 72 Ángeles</h4></div></article>
-    <article class="guide"><img src="https://i.imgur.com/LSuX988.png" loading="lazy" alt="Portada de El Arte de Leer los Símbolos Angélicos"><div><small>GUÍA 08</small><h4>El Arte de Leer los Símbolos Angélicos</h4></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-02.webp" width="900" height="900" loading="lazy" alt="Portada de Cábala Angélica Esencial"><div><small>GUÍA 02</small><h4>Cábala Angélica Esencial</h4></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-09.webp" width="900" height="900" loading="lazy" alt="Portada de Los 72 Nombres: Tradición y Claves de Lectura"><div><small>GUÍA 09</small><h4>Los 72 Nombres: Tradición y Claves de Lectura</h4></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-06.webp" width="900" height="900" loading="lazy" alt="Portada de Los 9 Coros Angélicos"><div><small>GUÍA 06</small><h4>Los 9 Coros Angélicos</h4></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-07.webp" width="900" height="900" loading="lazy" alt="Portada de Lecturas Comparadas de los 72 Ángeles"><div><small>GUÍA 07</small><h4>Lecturas Comparadas de los 72 Ángeles</h4></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-08.webp" width="900" height="900" loading="lazy" alt="Portada de El Arte de Leer los Símbolos Angélicos"><div><small>GUÍA 08</small><h4>El Arte de Leer los Símbolos Angélicos</h4></div></article>
   </div>
 
   <div class="group-title"><h3>Tus herramientas, en versión completa</h3><span>El siguiente nivel de lo que ya tienes</span></div>
   <div class="guides">
-    <article class="guide"><img src="https://i.imgur.com/enMp1EK.png" loading="lazy" alt="Portada de Diccionario de Cábala y Simbología Angélica"><div><small>GUÍA 05</small><h4>Diccionario de Cábala y Simbología Angélica</h4><p class="diff">Cada término que encuentras en tus fichas, explicado y a mano mientras estudias.</p></div></article>
-    <article class="guide"><img src="https://i.imgur.com/3uzDsfP.png" loading="lazy" alt="Portada de Rutas de los 72 Ángeles"><div><small>GUÍA 01</small><h4>Rutas de los 72 Ángeles</h4><p class="diff">Tu Guía Rápida te dice a qué Ángel acudir. Las Rutas te dan un camino de estudio completo.</p></div></article>
-    <article class="guide"><img src="https://i.imgur.com/A35Gde6.png" loading="lazy" alt="Portada de Manual de Oraciones e Intenciones"><div><small>GUÍA 03</small><h4>Manual de Oraciones e Intenciones</h4><p class="diff">Tu guía trae una oración por Ángel. El Manual te acompaña por situación.</p></div></article>
-    <article class="guide"><img src="https://i.imgur.com/A2eNtIB.png" loading="lazy" alt="Portada de 100 Reflexiones Angélicas"><div><small>GUÍA 04</small><h4>100 Reflexiones Angélicas</h4><p class="diff">Tus fichas traen preguntas para cada Ángel. Aquí tienes 100 más, organizadas por tema.</p></div></article>
-    <article class="guide"><img src="https://i.imgur.com/8VjfhIv.png" loading="lazy" alt="Portada de Casos de Estudio: Cómo Integrar tu Biblioteca"><div><small>GUÍA 10</small><h4>Casos de Estudio: Cómo Integrar tu Biblioteca</h4><p class="diff">Tu guía te enseña a leer cada ficha. Los Casos te enseñan a combinar toda tu biblioteca.</p></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-05.webp" width="900" height="900" loading="lazy" alt="Portada de Diccionario de Cábala y Simbología Angélica"><div><small>GUÍA 05</small><h4>Diccionario de Cábala y Simbología Angélica</h4><p class="diff">Cada término que encuentras en tus fichas, explicado y a mano mientras estudias.</p></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-01.webp" width="900" height="900" loading="lazy" alt="Portada de Rutas de los 72 Ángeles"><div><small>GUÍA 01</small><h4>Rutas de los 72 Ángeles</h4><p class="diff">Tu Guía Rápida te dice a qué Ángel acudir. Las Rutas te dan un camino de estudio completo.</p></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-03.webp" width="900" height="900" loading="lazy" alt="Portada de Manual de Oraciones e Intenciones"><div><small>GUÍA 03</small><h4>Manual de Oraciones e Intenciones</h4><p class="diff">Tu guía trae una oración por Ángel. El Manual te acompaña por situación.</p></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-04.webp" width="900" height="900" loading="lazy" alt="Portada de 100 Reflexiones Angélicas"><div><small>GUÍA 04</small><h4>100 Reflexiones Angélicas</h4><p class="diff">Tus fichas traen preguntas para cada Ángel. Aquí tienes 100 más, organizadas por tema.</p></div></article>
+    <article class="guide"><img src="/upsell/assets/guia-10.webp" width="900" height="900" loading="lazy" alt="Portada de Casos de Estudio: Cómo Integrar tu Biblioteca"><div><small>GUÍA 10</small><h4>Casos de Estudio: Cómo Integrar tu Biblioteca</h4><p class="diff">Tu guía te enseña a leer cada ficha. Los Casos te enseñan a combinar toda tu biblioteca.</p></div></article>
   </div>
 </section>
 
@@ -245,9 +260,9 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
 <section class="soft" id="muestras"><div class="wrap">
   <p class="eyebrow center" style="text-align:center">MIRA ANTES DE DECIDIR</p>
   <h2 class="center" style="text-align:center">Lee las páginas reales por dentro.</h2>
-  <p class="center" style="text-align:center;max-width:640px">15 páginas reales de las 10 guías de la biblioteca. Toca una para leerla completa.</p>
+  <p class="center" style="text-align:center;max-width:640px">Desliza para ver más y toca una página para ampliarla.</p>
   
-  <div class="samples" id="samples"></div>
+  <div id="carousels"></div>
 </div></section>
 
 
@@ -320,7 +335,7 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
   // Imagens: as que já estão no repositório carregam daqui; as demais vêm do upsell original (mesmo arquivo, mesma qualidade).
   var REMOTE='https://72bibliotecaupsell.vercel.app/assets/';
   var LOCAL={'sample-6-2-thumb.webp':1,'sample-6-3-thumb.webp':1,'sample-6-4-thumb.webp':1,'sample-7-2-thumb.webp':1,'sample-7-3-thumb.webp':1,'sample-7-4-thumb.webp':1,'sample-8-2-thumb.webp':1,'sample-8-3-thumb.webp':1,'sample-8-4-thumb.webp':1,'sample-9-2-thumb.webp':1,'sample-9-3-thumb.webp':1,'sample-9-4-thumb.webp':1,'sample-10-2-thumb.webp':1};
-  function src(f){return 'assets/'+f}
+  function src(f){return '/upsell/assets/'+f}
   var S=[
     [1,5,'Rutas de los 72 Ángeles','Ruta 01: Claridad para decidir'],
     [1,13,'Rutas de los 72 Ángeles','Ruta 05: Reconciliación y diálogo'],
@@ -338,34 +353,33 @@ h1{font-size:33px;line-height:1.18}h2{font-size:28px}
     [9,2,'Los 72 Nombres','El pasaje de partida'],
     [10,3,'Casos de Estudio','Caso 1: comenzar sin saturarse']
   ];
-  var grid=document.getElementById('samples'),modal=document.getElementById('viewer'),cur=0,visible=[];
-  function draw(f){
-    grid.innerHTML='';visible=[];
-    S.forEach(function(s,i){
-      if(f!=='all'&&String(s[0])!==f)return;
-      visible.push(i);
-      var b=document.createElement('button');b.type='button';b.className='sample';b.setAttribute('aria-label','Ampliar: '+s[3]);
-      b.innerHTML='<img loading="lazy" width="600" height="800" alt="">'+'<small>GUÍA '+s[0]+' · PÁGINA '+s[1]+'</small><b></b>';
-      b.querySelector('img').src=src('sample-'+s[0]+'-'+s[1]+'-thumb.webp');b.querySelector('img').alt=s[3];
-      b.querySelector('b').textContent=s[3];
-      b.onclick=function(){show(visible.indexOf(i))};
-      grid.appendChild(b);
+  var box=document.getElementById('carousels'),modal=document.getElementById('viewer'),cur=0;
+  for(var c=0;c<3;c++){
+    var wrap=document.createElement('div');wrap.className='carousel';
+    var tr=document.createElement('div');tr.className='track';
+    S.slice(c*5,c*5+5).forEach(function(s,j){
+      var i=c*5+j,b=document.createElement('button');b.type='button';b.className='slide';b.setAttribute('aria-label','Ampliar página');
+      b.innerHTML='<img loading="lazy" width="900" height="1200" alt="Página real de la biblioteca">';
+      b.querySelector('img').src=src('sample-'+s[0]+'-'+s[1]+'.webp');
+      b.onclick=function(){show(i)};tr.appendChild(b);
     });
+    var pv=document.createElement('button');pv.type='button';pv.className='cnav prev';pv.setAttribute('aria-label','Anterior');pv.textContent='‹';
+    var nx=document.createElement('button');nx.type='button';nx.className='cnav next';nx.setAttribute('aria-label','Siguiente');nx.textContent='›';
+    (function(t){pv.onclick=function(){t.scrollBy({left:-t.clientWidth*0.9,behavior:'smooth'})};nx.onclick=function(){t.scrollBy({left:t.clientWidth*0.9,behavior:'smooth'})}})(tr);
+    wrap.appendChild(pv);wrap.appendChild(tr);wrap.appendChild(nx);box.appendChild(wrap);
   }
   function show(k){
-    cur=(k+visible.length)%visible.length;var s=S[visible[cur]];
-    var im=document.getElementById('modal-img');im.src=src('sample-'+s[0]+'-'+s[1]+'.webp');im.alt=s[3];
-    document.getElementById('modal-book').textContent=s[2]+' · Página '+s[1];
-    document.getElementById('modal-count').textContent=(cur+1)+' / '+visible.length;
+    cur=(k+S.length)%S.length;var s=S[cur];
+    var im=document.getElementById('modal-img');im.src=src('sample-'+s[0]+'-'+s[1]+'.webp');im.alt='Página real de la biblioteca';
+    document.getElementById('modal-book').textContent='';
+    document.getElementById('modal-count').textContent=(cur+1)+' / '+S.length;
     if(!modal.open)modal.showModal();modal.scrollTop=0;
   }
-  document.querySelectorAll('.filter button').forEach(function(b){b.onclick=function(){document.querySelector('.filter .active').classList.remove('active');b.classList.add('active');draw(b.dataset.filter)}});
   document.getElementById('close').onclick=function(){modal.close()};
   document.getElementById('prev').onclick=function(){show(cur-1)};
   document.getElementById('next').onclick=function(){show(cur+1)};
   modal.addEventListener('click',function(e){if(e.target===modal)modal.close()});
   modal.addEventListener('keydown',function(e){if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
-  draw('all');
 
   // Widget de upsell da Hotmart (mesma integração da página original)
   var widget=document.getElementById('hotmart-sales-funnel'),status=document.getElementById('widget-status'),mounted=false;
