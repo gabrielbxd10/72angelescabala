@@ -37,7 +37,16 @@ ol,ul{list-style:none}
 summary{display:list-item}
 summary::-webkit-details-marker{display:none}
 .vsl{position:relative;width:100%;max-width:340px;aspect-ratio:9/16;margin:28px auto 12px;border-radius:14px;overflow:hidden;box-shadow:0 14px 40px #142d4433;background:#0d2033}
-.vsl iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl iframe,#ytp{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none}
+.vsl-shield{position:absolute;inset:0;z-index:2;cursor:pointer;background:linear-gradient(#0d2033 0,transparent 14%,transparent 86%,#0d2033 100%)}
+.vsl-unmute,.vsl-paused{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;border:0;border-radius:14px;padding:18px 20px;background:#8b692bee;color:#fff;font:inherit;cursor:pointer;box-shadow:0 10px 30px #0006;animation:vslpulse 1.6s ease-in-out infinite;width:78%}
+.vsl-unmute b,.vsl-paused b{font-size:16px}.vsl-unmute small{font-size:13px;opacity:.9}
+.vsl-ico,.vsl-play{font-size:34px;line-height:1}
+.vsl-paused{background:#142d44ee;animation:none}
+@keyframes vslpulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.04)}}
+.vsl-bar{position:absolute;left:0;right:0;bottom:0;height:6px;background:#ffffff33;z-index:4}
+.vsl-bar span{display:block;height:100%;width:0;background:#c9a75e;transition:width .25s linear}
+@media(prefers-reduced-motion:reduce){.vsl-unmute{animation:none}}
 </style>
 </head>
 <body>
@@ -50,7 +59,13 @@ summary::-webkit-details-marker{display:none}
 <section class="hero wrap"><div>
 <p class="eyebrow">GUÍA DIGITAL ILUSTRADA · 75 PÁGINAS + 3 BONOS</p>
 <h1>Los 72 Ángeles de la Cábala: deja de perderte entre información confusa y oraciones que no salen, y descubre a cuál acudir <em>en cada momento de tu vida.</em></h1>
-<div class="vsl"><iframe src="https://www.youtube-nocookie.com/embed/KcA06h6nE8U?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Los 72 Ángeles de la Cábala" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<div class="vsl" id="vsl">
+<div id="ytp"></div>
+<div class="vsl-shield" id="vslShield" aria-hidden="true"></div>
+<button type="button" class="vsl-unmute" id="vslUnmute"><span class="vsl-ico">🔊</span><b>Tu video ya empezó</b><small>Toca para escuchar</small></button>
+<button type="button" class="vsl-paused" id="vslPaused" hidden><span class="vsl-play">▶</span><b>Continuar viendo</b></button>
+<div class="vsl-bar"><span id="vslProg"></span></div>
+</div>
 <p class="meta mockup-caption">Tu acceso incluye la guía principal + 3 bonos que verás más abajo.</p>
 <p class="lead">Una guía visual con el nombre, las virtudes, la oración y las preguntas de reflexión de cada Ángel. La abres, eliges lo que estás viviendo y en pocos minutos tienes un Ángel, una oración y una intención para tu día.</p>
 <ul class="checks"><li>Los 72 Ángeles explicados uno por uno, sin tecnicismos</li><li>Encuentra tu Ángel según lo que estás viviendo</li><li>Una oración guiada lista para cada Ángel</li><li>En tu móvil, tablet o impresa en papel</li></ul>
@@ -246,6 +261,33 @@ summary::-webkit-details-marker{display:none}
   document.querySelectorAll('a.buy').forEach(function(a){
     a.addEventListener('click',function(){try{if(window.fbq)fbq('track','InitiateCheckout',{value:9.90,currency:'USD'})}catch(e){}});
   });
+})();
+</script>
+<script>
+(function(){
+  var player,timer,started=false;
+  var bar=document.getElementById('vslProg'),un=document.getElementById('vslUnmute'),pa=document.getElementById('vslPaused'),sh=document.getElementById('vslShield');
+  // barra de progresso: rápida no começo, lenta no final
+  function ease(x){return 1-Math.pow(1-x,3)}
+  function tick(){try{var d=player.getDuration(),t=player.getCurrentTime();if(d>0)bar.style.width=(ease(Math.min(t/d,1))*100).toFixed(2)+'%'}catch(e){}}
+  window.onYouTubeIframeAPIReady=function(){
+    player=new YT.Player('ytp',{host:'https://www.youtube-nocookie.com',videoId:'KcA06h6nE8U',
+      playerVars:{autoplay:1,mute:1,controls:0,disablekb:1,fs:0,modestbranding:1,rel:0,playsinline:1,iv_load_policy:3,cc_load_policy:0},
+      events:{onReady:function(e){e.target.mute();e.target.playVideo();timer=setInterval(tick,250)},
+        onStateChange:function(e){
+          if(e.data===YT.PlayerState.ENDED){bar.style.width='100%';pa.querySelector('b').textContent='Ver de nuevo';pa.hidden=false;}
+        }}});
+  };
+  un.onclick=function(){if(!player)return;player.unMute();player.setVolume(100);player.seekTo(0,true);player.playVideo();un.hidden=true;started=true;};
+  sh.onclick=function(){
+    if(!player)return;
+    if(!started){un.onclick();return;}
+    var st=player.getPlayerState();
+    if(st===YT.PlayerState.PLAYING){player.pauseVideo();pa.querySelector('b').textContent='Continuar viendo';pa.hidden=false;}
+    else{player.playVideo();pa.hidden=true;}
+  };
+  pa.onclick=function(){if(player.getPlayerState()===YT.PlayerState.ENDED)player.seekTo(0,true);player.playVideo();pa.hidden=true;};
+  var tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';tag.async=true;document.body.appendChild(tag);
 })();
 </script>
 </body>
