@@ -47,6 +47,7 @@ summary::-webkit-details-marker{display:none}
 .vsl-bar{position:absolute;left:0;right:0;bottom:0;height:6px;background:#ffffff33;z-index:4}
 .vsl-bar span{display:block;height:100%;width:0;background:#c9a75e;transition:width .25s linear}
 @media(prefers-reduced-motion:reduce){.vsl-unmute{animation:none}}
+.vsl [hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -278,7 +279,7 @@ summary::-webkit-details-marker{display:none}
           if(e.data===YT.PlayerState.ENDED){bar.style.width='100%';pa.querySelector('b').textContent='Ver de nuevo';pa.hidden=false;}
         }}});
   };
-  un.onclick=function(){if(!player)return;player.unMute();player.setVolume(100);player.seekTo(0,true);player.playVideo();un.hidden=true;started=true;};
+  un.onclick=function(){if(!player||started)return;started=true;un.hidden=true;pa.hidden=true;player.unMute();player.setVolume(100);player.seekTo(0,true);player.playVideo();};
   sh.onclick=function(){
     if(!player)return;
     if(!started){un.onclick();return;}
